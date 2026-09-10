@@ -44,7 +44,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 )
 
         schema = vol.Schema({
-            vol.Required(CONF_HOST, default="http://192.168.254.74:25566"): str,
+            vol.Required(CONF_HOST, default="http://192.168.254.254:25560"): str,
             vol.Required(
                 CONF_API_KEY_ENTITY,
                 default="input_text.mcss_apikey"
