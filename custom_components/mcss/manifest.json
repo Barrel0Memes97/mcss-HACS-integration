@@ -1,0 +1,11 @@
+{
+  "domain": "mcss",
+  "name": "MC Server Soft",
+  "version": "0.1.0",
+  "documentation": "https://docs.mcserversoft.com/apis/v2",
+  "issue_tracker": "https://github.com/",
+  "codeowners": [],
+  "config_flow": true,
+  "integration_type": "hub",
+  "iot_class": "local_polling"
+}
