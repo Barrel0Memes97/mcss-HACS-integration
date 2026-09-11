@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 DOMAIN = "mcss"
+
 CONF_HOST = "host"
 CONF_API_KEY_ENTITY = "api_key_entity"
 CONF_SCAN_INTERVAL = "scan_interval"

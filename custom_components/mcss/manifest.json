@@ -1,11 +1,11 @@
 {
   "domain": "mcss",
   "name": "MC Server Soft",
-  "version": "0.1.0",
-  "documentation": "https://docs.mcserversoft.com/apis/v2",
-  "issue_tracker": "https://github.com/",
+  "version": "0.2.3",
+  "documentation": "https://github.com/Barrel0Memes97/mcss-HACS-integration",
+  "issue_tracker": "https://github.com/Barrel0Memes97/mcss-HACS-integration/issues",
   "codeowners": [],
   "config_flow": true,
-  "integration_type": "hub",
-  "iot_class": "local_polling"
+  "iot_class": "local_polling",
+  "requirements": []
 }
