@@ -2,7 +2,7 @@
 
 
 
-**"MC Server Soft is a server wrapper which is a program that doesn't change anything about the Minecraft server itself. It is an UI built on top of the server console, with the purpose of adding additional functionality and ease of management for the server owner." -MC Server Soft Team**
+**"MC Server Soft is a server wrapper which is a program that doesn't change anything about the Minecraft server itself. It is an UI built on top of the server console, with the purpose of adding additional functionality and ease of management for the server owner."** -MC Server Soft Team
 
 MCSS v2 API integration for MC Server Soft 13.7+.
 
@@ -19,16 +19,44 @@ Useful links:
 Configured through Home Assistant's UI. It reads the API key from an existing
 input_text helper entity and discovers the servers returned by `/api/v2/servers`.
 
+This intigration dynamically adds newly discovered servers. When MCSS removes a server, its existing HA entities become unavailable; they are not forcibly deleted from the entity registry
+
 Current defaults:
 - MCSS host: http://192.168.254.254:25560
 - API key entity: input_text.mcss_apikey
-- Poll interval: 15 seconds
+- Poll interval: 
+  - Integration update interval      :15
+  - Console refresh interval         :15
+  - Player name update interval      :60
 
 Install as a HACS custom repository by pointing HACS at this repository 
 `https://github.com/Barrel0Memes97/mcss-HACS-integration`
 
+# API key
+
+The integration references an existing Home Assistant `input_text` instead of storing a second copy of the key.
+
+Example:
+
+```yaml
+input_text:
+  mcss_apikey:
+    name: MCSS API Key
+    mode: password
+    max: 200
+```
+
+1. Go to Settings / Devices & services / Helpers
+2. Find MCSS API Key
+3. Click it and enter your API key
+
+Remember to click save
+
+Then select `input_text.mcss_apikey` during setup.
+
 
 # Features:
+
 - Server controls 
     - Start
     - Stop
@@ -40,7 +68,8 @@ Install as a HACS custom repository by pointing HACS at this repository
 - Max RAM allucated
 - Total RAM used
 
-# TO DO:
+Added in V2
+
 - Configurable data reload interval
 - Server pack icons
 - Server uptime
@@ -49,7 +78,7 @@ Install as a HACS custom repository by pointing HACS at this repository
 - Active players list
   - Player names
   - Potentially player-specific information
-    - Player heads?
+    - ~~Player heads?~~ Definitly not an easy thing for me to add, but would be cool
 
 - Console command input
   - Text field for entering console commands
@@ -65,6 +94,8 @@ Install as a HACS custom repository by pointing HACS at this repository
   - Stopping
   - Restarting
 
+# TO DO:
+
 - Server connection information
   - Server address
   - Server port
@@ -74,3 +105,8 @@ Install as a HACS custom repository by pointing HACS at this repository
   - Server type/loader
   - Modpack/mod information
 
+- Add TPS counter (**T**icks **P**er **S**econd)
+  - Pull server slowdown metrics into HA, for example:
+    ``` txt
+    Can't keep up! Did the system time change, or is the server overloaded? Running 2104ms behind, skipping 42 tick(s)
+    ```
