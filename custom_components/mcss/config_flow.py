@@ -13,6 +13,8 @@ from .const import (
     CONF_CONSOLE_LINES,
     CONF_HOST,
     CONF_PLAYER_INTERVAL,
+    CONF_FILTER_PLAYER_MESSAGES,
+    DEFAULT_FILTER_PLAYER_MESSAGES,
     CONF_SCAN_INTERVAL,
     DEFAULT_CONSOLE_INTERVAL,
     DEFAULT_CONSOLE_LINES,
@@ -237,8 +239,12 @@ class MCSSOptionsFlow(config_entries.OptionsFlow):
             ): vol.All(vol.Coerce(int), vol.Range(min=1, max=1000)),
             vol.Required(
                 CONF_PLAYER_INTERVAL,
+    CONF_FILTER_PLAYER_MESSAGES,
+    DEFAULT_FILTER_PLAYER_MESSAGES,
                 default=values.get(
                     CONF_PLAYER_INTERVAL,
+    CONF_FILTER_PLAYER_MESSAGES,
+    DEFAULT_FILTER_PLAYER_MESSAGES,
                     DEFAULT_PLAYER_INTERVAL,
                 ),
             ): vol.All(

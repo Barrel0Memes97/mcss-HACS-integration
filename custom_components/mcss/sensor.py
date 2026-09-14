@@ -39,6 +39,12 @@ class MCSSSensor(MCSSEntity, SensorEntity):
             "uptime": "Uptime",
             "uptime_text": "Uptime display",
             "console": "Latest console output",
+            "tps": "TPS",
+            "address": "Server address",
+            "port": "Server port",
+            "version": "Server version",
+            "loader": "Server type",
+            "modpack": "Modpack / mods",
         }[self.kind]
 
     @property
@@ -112,6 +118,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
     kinds = (
         "status", "players", "player_list", "cpu", "memory",
         "memory_percent", "uptime", "uptime_text", "console",
+        "tps", "address", "port", "version", "loader", "modpack",
     )
 
     def sync():

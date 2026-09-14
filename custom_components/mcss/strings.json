@@ -33,7 +33,8 @@
           "api_key_entity": "API key input_text",
           "scan_interval": "Update interval (seconds)",
           "console_interval": "Console refresh interval (seconds)",
-          "console_lines": "Console history lines"
+          "console_lines": "Console history lines",
+          "filter_player_messages": "Filter player-count console messages"
         }
       }
     }

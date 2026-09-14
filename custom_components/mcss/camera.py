@@ -2,6 +2,7 @@ from __future__ import annotations
 from homeassistant.components.camera import Camera
 from .const import DOMAIN
 from .entity import MCSSEntity
+from pathlib import Path
 
 
 class MCSSIconCamera(MCSSEntity, Camera):
@@ -18,7 +19,10 @@ class MCSSIconCamera(MCSSEntity, Camera):
         return bool(self.server) and bool(self.server.get("icon"))
 
     async def async_camera_image(self, width=None, height=None):
-        return self.server.get("icon") or await self.coordinator.async_get_icon(self.server_id)
+        image = self.server.get("icon") or await self.coordinator.async_get_icon(self.server_id)
+        if image:
+            return image
+        return (Path(__file__).parent / "brand" / "minecraft-icon.png").read_bytes()
 
 
 async def async_setup_entry(hass, entry, async_add_entities):

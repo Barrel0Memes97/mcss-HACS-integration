@@ -21,6 +21,8 @@ from .const import (
     CONF_CONSOLE_LINES,
     CONF_HOST,
     CONF_PLAYER_INTERVAL,
+    CONF_FILTER_PLAYER_MESSAGES,
+    DEFAULT_FILTER_PLAYER_MESSAGES,
     CONF_SCAN_INTERVAL,
     DEFAULT_CONSOLE_INTERVAL,
     DEFAULT_CONSOLE_LINES,
@@ -105,6 +107,23 @@ def parse_players(lines: list[str]) -> list[str] | None:
     return None
 
 
+
+_PLAYER_MESSAGE_RE = re.compile(r"There are\\s+\\d+\\s*/\\s*\\d+\\s+players online\\s*:", re.I)
+_TPS_RE = re.compile(r"Running\\s+(\\d+)ms behind.*?skipping\\s+(\\d+)\\s+tick", re.I)
+
+def filter_console_lines(lines, enabled):
+    if not enabled:
+        return lines
+    return [line for line in lines if not _PLAYER_MESSAGE_RE.search(_message_text(line))]
+
+def estimate_tps(lines):
+    for line in reversed(lines):
+        m = _TPS_RE.search(str(line))
+        if m:
+            skipped = int(m.group(2))
+            return max(0.0, round(20.0 * (1 - min(skipped, 20) / 20), 1))
+    return 20.0
+
 class MCSSCoordinator(DataUpdateCoordinator[dict[str, dict]]):
     def __init__(self, hass, entry: ConfigEntry) -> None:
         self.entry = entry
@@ -129,9 +148,13 @@ class MCSSCoordinator(DataUpdateCoordinator[dict[str, dict]]):
         self.player_seconds = int(
             options.get(
                 CONF_PLAYER_INTERVAL,
+    CONF_FILTER_PLAYER_MESSAGES,
+    DEFAULT_FILTER_PLAYER_MESSAGES,
                 DEFAULT_PLAYER_INTERVAL,
             )
         )
+
+        self.filter_player_messages = options.get(CONF_FILTER_PLAYER_MESSAGES, DEFAULT_FILTER_PLAYER_MESSAGES)
 
         self.console_lines = int(
             options.get(
