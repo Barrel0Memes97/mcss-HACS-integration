@@ -148,8 +148,6 @@ class MCSSCoordinator(DataUpdateCoordinator[dict[str, dict]]):
         self.player_seconds = int(
             options.get(
                 CONF_PLAYER_INTERVAL,
-                CONF_FILTER_PLAYER_MESSAGES,
-                DEFAULT_FILTER_PLAYER_MESSAGES,
                 DEFAULT_PLAYER_INTERVAL,
             )
         )
