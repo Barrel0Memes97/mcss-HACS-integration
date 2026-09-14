@@ -74,6 +74,18 @@ class MCSSSensor(MCSSEntity, SensorEntity):
         if self.kind == "console":
             lines = s.get("console", [])
             return lines[-1] if lines else "No console output"
+        if self.kind == "tps":
+            return st.get("tps", s.get("tps", 20.0))
+        if self.kind == "address":
+            return s.get("address", s.get("host", "Unknown"))
+        if self.kind == "port":
+            return s.get("port", "Unknown")
+        if self.kind == "version":
+            return s.get("version", s.get("minecraftVersion", "Unknown"))
+        if self.kind == "loader":
+            return s.get("loader", s.get("serverType", "Unknown"))
+        if self.kind == "modpack":
+            return s.get("modpack", s.get("mods", "Unknown"))
         return None
 
     @property
@@ -109,6 +121,12 @@ class MCSSSensor(MCSSEntity, SensorEntity):
             "uptime": "mdi:timer-outline",
             "uptime_text": "mdi:timer-outline",
             "console": "mdi:console",
+            "tps": "mdi:speedometer",
+            "address": "mdi:ip-network",
+            "port": "mdi:ethernet",
+            "version": "mdi:information",
+            "loader": "mdi:package-variant",
+            "modpack": "mdi:package-variant-closed",
         }[self.kind]
 
 

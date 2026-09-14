@@ -1,7 +1,7 @@
 {
   "domain": "mcss",
   "name": "MC Server Soft",
-  "version": "0.3.0",
+  "version": "3.0.3",
   "documentation": "https://github.com/Barrel0Memes97/mcss-HACS-integration",
   "issue_tracker": "https://github.com/Barrel0Memes97/mcss-HACS-integration/issues",
   "codeowners": [],

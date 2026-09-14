@@ -205,6 +205,9 @@ class MCSSOptionsFlow(config_entries.OptionsFlow):
                 CONF_PLAYER_INTERVAL: current.get(
                     CONF_PLAYER_INTERVAL, DEFAULT_PLAYER_INTERVAL
                 ),
+                CONF_FILTER_PLAYER_MESSAGES: current.get(
+                    CONF_FILTER_PLAYER_MESSAGES, DEFAULT_FILTER_PLAYER_MESSAGES
+                ),
             }),
         )
 
@@ -238,13 +241,13 @@ class MCSSOptionsFlow(config_entries.OptionsFlow):
                 ),
             ): vol.All(vol.Coerce(int), vol.Range(min=1, max=1000)),
             vol.Required(
+                CONF_FILTER_PLAYER_MESSAGES,
+                default=values.get(CONF_FILTER_PLAYER_MESSAGES, DEFAULT_FILTER_PLAYER_MESSAGES),
+            ): bool,
+            vol.Required(
                 CONF_PLAYER_INTERVAL,
-    CONF_FILTER_PLAYER_MESSAGES,
-    DEFAULT_FILTER_PLAYER_MESSAGES,
                 default=values.get(
                     CONF_PLAYER_INTERVAL,
-    CONF_FILTER_PLAYER_MESSAGES,
-    DEFAULT_FILTER_PLAYER_MESSAGES,
                     DEFAULT_PLAYER_INTERVAL,
                 ),
             ): vol.All(
