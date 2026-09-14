@@ -107,6 +107,17 @@ Added in V2
 
 - Add TPS counter (**T**icks **P**er **S**econd)
   - Pull server slowdown metrics into HA, for example:
-    ``` txt
+    ``` console
     Can't keep up! Did the system time change, or is the server overloaded? Running 2104ms behind, skipping 42 tick(s)
     ```
+- console filter
+  - toggle entity to remove messages like
+    ``` console
+    [01:59:17] [Server thread/INFO] [minecraft/MinecraftServer]: There are 1 of a max of 20 players online: Barrel0Memes97
+    ```
+    from the console entity that is added already
+
+- Fix player list
+  - Bug where the number of connected players is correctly set to 0 when everyone disconnects, but the list of active players keeps a player or two incorrectly.
+
+- Add default server icon unless server provides an icon
