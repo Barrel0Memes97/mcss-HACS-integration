@@ -1,11 +1,13 @@
 {
   "domain": "mcss",
   "name": "MC Server Soft",
-  "version": "0.2.3",
+  "version": "3.1.0",
   "documentation": "https://github.com/Barrel0Memes97/mcss-HACS-integration",
   "issue_tracker": "https://github.com/Barrel0Memes97/mcss-HACS-integration/issues",
   "codeowners": [],
   "config_flow": true,
   "iot_class": "local_polling",
-  "requirements": []
+  "requirements": [
+    "mcstatus==14.2.0"
+  ]
 }

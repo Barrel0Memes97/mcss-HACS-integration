@@ -1,3 +1,4 @@
+"""Constants for the MC Server Soft integration."""
 from __future__ import annotations
 
 DOMAIN = "mcss"
@@ -8,11 +9,15 @@ CONF_SCAN_INTERVAL = "scan_interval"
 CONF_CONSOLE_INTERVAL = "console_interval"
 CONF_CONSOLE_LINES = "console_lines"
 CONF_PLAYER_INTERVAL = "player_interval"
+CONF_TPS_INTERVAL = "tps_interval"
+CONF_FILTER_PLAYER_MESSAGES = "filter_player_messages"
 
 DEFAULT_SCAN_INTERVAL = 30
 DEFAULT_CONSOLE_INTERVAL = 5
 DEFAULT_CONSOLE_LINES = 50
 DEFAULT_PLAYER_INTERVAL = 60
+DEFAULT_TPS_INTERVAL = 60
+DEFAULT_FILTER_PLAYER_MESSAGES = True
 
 ACTION_STOP = 1
 ACTION_START = 2
@@ -25,4 +30,4 @@ ATTR_SERVER_ID = "server_id"
 ATTR_COMMAND = "command"
 ATTR_ACTION = "action"
 
-PLATFORMS = ["sensor", "button", "camera", "text"]
+PLATFORMS = ["sensor", "button", "camera", "text", "switch"]

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from typing import Any
-from aiohttp import ClientSession, ClientResponseError
+from aiohttp import ClientSession, ClientResponseError, ClientTimeout
 
 
 class MCSSApi:
@@ -20,7 +20,8 @@ class MCSSApi:
             headers.update(extra)
 
         async with self._session.request(
-            method, f"{self._host}/api/v2{path}", headers=headers, **kwargs
+            method, f"{self._host}/api/v2{path}", headers=headers,
+            timeout=ClientTimeout(total=10), **kwargs
         ) as response:
             if response.status >= 400:
                 text = await response.text()

@@ -13,6 +13,10 @@ from .const import (
     CONF_CONSOLE_LINES,
     CONF_HOST,
     CONF_PLAYER_INTERVAL,
+    CONF_FILTER_PLAYER_MESSAGES,
+    DEFAULT_FILTER_PLAYER_MESSAGES,
+    CONF_TPS_INTERVAL,
+    DEFAULT_TPS_INTERVAL,
     CONF_SCAN_INTERVAL,
     DEFAULT_CONSOLE_INTERVAL,
     DEFAULT_CONSOLE_LINES,
@@ -55,6 +59,8 @@ class MCSSConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                             CONF_CONSOLE_INTERVAL: DEFAULT_CONSOLE_INTERVAL,
                             CONF_CONSOLE_LINES: DEFAULT_CONSOLE_LINES,
                             CONF_PLAYER_INTERVAL: DEFAULT_PLAYER_INTERVAL,
+                            CONF_TPS_INTERVAL: DEFAULT_TPS_INTERVAL,
+                            CONF_FILTER_PLAYER_MESSAGES: DEFAULT_FILTER_PLAYER_MESSAGES,
                         },
                     )
 
@@ -178,6 +184,8 @@ class MCSSOptionsFlow(config_entries.OptionsFlow):
                     CONF_PLAYER_INTERVAL: int(
                         user_input[CONF_PLAYER_INTERVAL]
                     ),
+                    CONF_TPS_INTERVAL: int(user_input[CONF_TPS_INTERVAL]),
+                    CONF_FILTER_PLAYER_MESSAGES: bool(user_input[CONF_FILTER_PLAYER_MESSAGES]),
                 },
             )
 
@@ -202,6 +210,12 @@ class MCSSOptionsFlow(config_entries.OptionsFlow):
                 ),
                 CONF_PLAYER_INTERVAL: current.get(
                     CONF_PLAYER_INTERVAL, DEFAULT_PLAYER_INTERVAL
+                ),
+                CONF_FILTER_PLAYER_MESSAGES: current.get(
+                    CONF_FILTER_PLAYER_MESSAGES, DEFAULT_FILTER_PLAYER_MESSAGES
+                ),
+                CONF_TPS_INTERVAL: current.get(
+                    CONF_TPS_INTERVAL, DEFAULT_TPS_INTERVAL
                 ),
             }),
         )
@@ -235,6 +249,14 @@ class MCSSOptionsFlow(config_entries.OptionsFlow):
                     CONF_CONSOLE_LINES, DEFAULT_CONSOLE_LINES
                 ),
             ): vol.All(vol.Coerce(int), vol.Range(min=1, max=1000)),
+            vol.Required(
+                CONF_FILTER_PLAYER_MESSAGES,
+                default=values.get(CONF_FILTER_PLAYER_MESSAGES, DEFAULT_FILTER_PLAYER_MESSAGES),
+            ): bool,
+            vol.Required(
+                CONF_TPS_INTERVAL,
+                default=values.get(CONF_TPS_INTERVAL, DEFAULT_TPS_INTERVAL),
+            ): vol.All(vol.Coerce(int), vol.Range(min=0, max=600)),
             vol.Required(
                 CONF_PLAYER_INTERVAL,
                 default=values.get(
